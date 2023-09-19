@@ -1,8 +1,8 @@
 'use strict';
 
 define('composer/formatting', [
-	'composer/preview', 'composer/resize', 'topicThumbs', 'screenfull',
-], function (preview, resize, topicThumbs, screenfull) {
+	'composer/preview', 'composer/resize', 'topicThumbs', 'screenfull', 'topicIdentity',
+], function (preview, resize, topicThumbs, screenfull, topicIdentity) {
 	var formatting = {};
 
 	var formattingDispatchTable = {
@@ -63,6 +63,20 @@ define('composer/formatting', [
 
 			screenfull.toggle(postContainer.get(0));
 			$(window).trigger('action:composer.fullscreen', { postContainer: postContainer });
+		},
+
+		identity: function () {
+			formatting.exitFullscreen();
+			var postContainer = this;
+			require(['composer'], function (composer) {
+				const uuid = postContainer.get(0).getAttribute('data-uuid');
+				const composerObj = composer.posts[uuid];
+				if (composerObj.action === 'topics.post' || (composerObj.action === 'posts.edit' && composerObj.isMain)) {
+					topicIdentity.modal.open({ id: uuid, pid: composerObj.pid }).then(() => {
+						postContainer.trigger('identity.uploaded');	// toggle draft save
+					});
+				}
+			});
 		},
 	};
 

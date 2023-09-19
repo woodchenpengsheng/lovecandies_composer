@@ -27,6 +27,7 @@ define('composer/drafts', ['api', 'alerts'], function (api, alerts) {
 		postContainer.on('click', '[component="category/list"] [data-cid]', utils.debounce(doSaveDraft, draftSaveDelay));
 		postContainer.on('itemAdded', '.tags', utils.debounce(doSaveDraft, draftSaveDelay));
 		postContainer.on('thumb.uploaded', doSaveDraft);
+		postContainer.on('identity.uploaded', doSaveDraft);
 
 		draftIconEl.on('animationend', function () {
 			$(this).toggleClass('active', false);

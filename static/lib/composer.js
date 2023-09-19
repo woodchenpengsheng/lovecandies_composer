@@ -14,6 +14,7 @@ define('composer', [
 	'composer/scheduler',
 	'scrollStop',
 	'topicThumbs',
+	'topicIdentity',
 	'api',
 	'bootbox',
 	'alerts',
@@ -23,7 +24,7 @@ define('composer', [
 	'screenfull',
 ], function (taskbar, translator, uploads, formatting, drafts, tags,
 	categoryList, preview, resize, autocomplete, scheduler, scrollStop,
-	topicThumbs, api, bootbox, alerts, hooks, messagesModule, search, screenfull) {
+	topicThumbs, topicIdentity, api, bootbox, alerts, hooks, messagesModule, search, screenfull) {
 	var composer = {
 		active: undefined,
 		posts: {},
@@ -823,6 +824,7 @@ define('composer', [
 			postContainer.remove();
 			drafts.removeDraft(postData.save_id);
 			topicThumbs.deleteAll(post_uuid);
+			topicIdentity.delete(post_uuid);
 
 			taskbar.discard('composer', post_uuid);
 			$('[data-action="post"]').removeAttr('disabled');

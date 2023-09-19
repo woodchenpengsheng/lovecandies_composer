@@ -89,6 +89,15 @@ plugin.getFormattingOptions = async function () {
 				className: 'fa fa-arrows-alt',
 				visibility: defaultVisibility,
 			},
+			{
+				name: 'identity',
+				title: '[[topic:composer.identity]]',
+				className: 'fa-regular fa-circle-user',
+				visibility: {
+					...defaultVisibility,
+					reply: false,
+				},
+			},
 		],
 	};
 	if (parseInt(meta.config.allowTopicsThumbnail, 10) === 1) {

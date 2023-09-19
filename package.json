@@ -1,7 +1,7 @@
 {
   "name": "nodebb-plugin-composer-default",
   "version": "10.2.13",
-  "description": "Default composer for NodeBB",
+  "description": "在nodebb默认的编辑工具上增加用户名册信息",
   "main": "library.js",
   "repository": {
     "type": "git",
